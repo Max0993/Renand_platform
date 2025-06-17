@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Jean Pierre",
+    "phone": "509-1234-5678",
+    "transfercode": "TRX7890",
+    "opinion": "Bon sèvis",
+    "montan": "1500 HTG",
+    "company": "Digicel"
+  },
+  {
+    "id": 2,
+    "name": "Marie Louise",
+    "phone": "509-8765-4321",
+    "transfercode": "TRX4567",
+    "opinion": "Satisfè",
+    "montan": "2000 HTG",
+    "company": "Natcom"
+  }
+]

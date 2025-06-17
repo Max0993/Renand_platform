@@ -1,0 +1,31 @@
+/* MOBILE VERSION 
+
+@media only screen and (max-width: 786px) {
+
+
+.page{
+
+	border: 20px;
+	padding-top: 30%;
+
+}
+
+
+.page h2 {
+	text-align: center;
+	font-size: 22px;
+	margin-left: 194px;
+	border: 8px solid darkgreen;
+	border-top: none;
+	border-left:none ;
+	border-right: none;
+	width: 60%;
+}
+
+
+.tab{
+	
+	background-color: ghostwhite;
+	border: 4px solid darkgreen;	
+}
+}*/

@@ -43,7 +43,7 @@
   form button {
     width: 100%;
     padding: 12px;
-    background-color: #28a745;
+    background-color: #17A589;
     color: white;
     font-size: 16px;
     border: none;
@@ -59,3 +59,51 @@
   
 
 
+  /*SELECT PART*/
+  .custom-select {
+    position: relative;
+    width: 100%;
+    margin-top: 5px;
+  }
+  
+  /* Select dropdown styling */
+  .custom-select select {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown arrow styling */
+  .custom-select::after {
+    content: "▼";
+    font-size: 12px;
+    color: #666;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  /* Focus states */
+  .custom-select select:focus {
+    outline: none;
+    border-color: #17A589;
+    box-shadow: 0 0 0 2px rgba(23, 165, 137, 0.2);
+  }
+
+  .custom-select select option {
+    padding: 10px;
+  }
+  
+  /* Disabled placeholder styling */
+  .custom-select select option[disabled][selected] {
+    color: #999;
+  }

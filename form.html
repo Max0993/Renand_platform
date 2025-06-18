@@ -8,13 +8,20 @@
 <body>
 
   <form id="dataForm">
-    <label>Name: <input type="text" name="name" required></label><br>
-    <label>Phone: <input type="text" name="phone" required></label><br>
-    <label>Transfer Code: <input type="text" name="transfercode" required></label><br>
-    <label>Opinion: <input type="text" name="opinion" required></label><br>
+    <label>Non: <input type="text" name="name" required></label><br>
+    <label>Telefòn: <input type="text" name="phone" required></label><br>
+    <label>Kòd transfè: <input type="text" name="transfercode" required></label><br>
+    <label>Avi ou:<input type="text" name="opinion" required></label><br>
     <label>Montan: <input type="text" name="montan" required></label><br>
-    <label>Company: <input type="text" name="company" required></label><br>
-    <button type="submit">Submit</button>
+    <!--<label>Konpayi: <input type="text" name="company" required></label><br>-->
+	<label>Konpayi: 
+		<select name="company" required>
+		  <option value="" disabled selected>Chwazi...</option>
+		  <option value="Natcash">Natcash</option>
+		  <option value="MonCash">MonCash</option>
+		</select>
+	  </label><br>
+    <button type="submit">soumèt</button>
   </form>
 
   <script src="send.js"></script>

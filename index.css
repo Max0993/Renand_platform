@@ -4,6 +4,13 @@
     padding: 0;
 }
 
+
+/* Prevent all horizontal scrolling */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
 .body2 {
     position: fixed;
     top: 0;
@@ -18,7 +25,7 @@
 .head-main {
     height: 70px;
     position: relative;
-   background-color: var(--color2);
+   background-color: #17A589;
    display: flex;
    /*justify-content: ;*/
    align-items: center;
@@ -34,8 +41,6 @@
     height: 55px;
     
 }
-
-
 
 
 .about {
@@ -78,11 +83,13 @@
     font-size: 18px;
     margin-bottom: 45px;
     Display: flex;
+   
 }
 
 
 
 .main-quotes p {
+    
   text-align: center; 
     font-size: 18px;
     line-height: 20px;
@@ -109,7 +116,7 @@
 .index-category {
     width:100%;
     padding-bottom: 05px;
-    background-color: #32CD32;
+    background-color: #17A589;
     display: flex;
     justify-content: center;
     column-gap: 25px;
@@ -140,21 +147,60 @@
     margin-bottom: 20px;
 }
 
-.index-category-box:nth-child(2) {
-    background-image: url(img/1gal.jpg);
+.category_1 {
+    width: 95%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.categoryImage1 {
+    width: 40%;
+    height: auto;
+}
+
+.category_2 {
+    width: 95%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.categoryImage2 {
+    width: 40%;
+    height: auto;
+}
+
+.category_3 {
+    width: 95%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.categoryImage3 {
+    margin-top: 2%;
+    width: 30%;
+    height: auto;
 }
 
 
-.index-category-box:nth-child(3) {
-    background-image: url(img/5gal.jpg);
-}
-
-
-.index-category-box:nth-child(4) {
-    background-image: url(img/55gal.jpg);  
-}
-
-.dark-overlay {
+/*.dark-overlay {
     position: absolute;
     top: 0;
     right: 0;
@@ -176,7 +222,77 @@
     color: black;
     text-shadow: -2px 2px 4px rgb(10, 10, 9);
     z-index: 100;
-}
+}*/
+/* Category section styling */
+.index-category {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  /* Category container */
+  .category-container {
+    width: 95%;
+    margin-bottom: 20px;
+    background-color: white;
+  }
+  
+  /* Category box/link */
+  .category-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+  }
+  
+  /* Image wrapper - crucial for positioning */
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Category images */
+  .category-img {
+    width: 40%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Special case for 55gal image */
+  .category-container:nth-child(3) .category-img {
+    width: 30%;
+    margin-top: 2%;
+  }
+  
+  /* Dark overlay */
+  .dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Allows clicks to pass through */
+  }
+  
+  /* Hover effects */
+  .category-box:hover .dark-overlay {
+    opacity: 0;
+  }
+  
+  .category-box:hover .category-img {
+    transform: scale(1.05); /* Optional: slight zoom effect */
+  }
+
+    
 
 
 /* ABOUT SECTION */
@@ -264,6 +380,11 @@
     background-image: url(img/facebook\ logo\ in\ black.png);
     background-repeat:no-repeat;
     background-size: cover;
+}
+
+.sm-line {
+    font-size: 0.6rem;
+    text-align: center;
 }
 
 .header-main-sm-fb:hover{
@@ -356,14 +477,14 @@
 
 
 .header-main-span ul li ul li a {
-    background-color: #32CD32;
+    background-color: #17A589;
     color: rgb(0, 0, 0);
     border-top: 2px;
     text-align: left;
 }
 
 .header-main-span ul li ul li a:hover {
-    background-color: #FFFFE0;
+    background-color: ghostwhite;
     color: rgb(5, 5, 5);
 }
 
@@ -416,6 +537,7 @@ font-weight: bold;
 
 
 .header-main-span {
+    background-color: #17A589;
     width: fit-content;
     height: 100%;
 }
@@ -443,11 +565,12 @@ ul li:hover>ul {
 
 .index-footer-a {
     width: 6%;
-    background-color: green;
+    background-color: #17A589;
     border-radius: 10px;
     border: none;
     font-size: 12px;
     color: #FFFFE0;
+    margin-left: 8%;
 
 }
 
@@ -459,10 +582,10 @@ color: black;
 
 .index-footer-b {
     width: 6%;
-    background-color: green;
+    background-color: #17A589;
     border-radius: 10px;
     border: none;
-    float: right;
+    margin-left: 85%;
     color: #FFFFE0;
     font-size: 12px;
     margin-bottom: 45px;
@@ -492,19 +615,89 @@ color: black;
 }
 
 
+
+/*SECOND CSS*/
+:root {
+  --color1: ghostwhite;
+  --color2: #32CD32;
+}
+
+body {
+  background-color: var(--color1);
+  position: relative; /* needed for ::after positioning */
+  margin: 0;
+  font-family: 'Roboto', sans-serif; /* Changed font to Roboto */
+}
+
+/* Add multiple social icons as faint background images */
+body::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    url("img/Facebook logo in black.png"),
+    url("img/instagram logo in black.jpg"),
+    url("img/tweeter icon noir.jpg"),
+    url("img/telegram icon noir.jpg");
+  background-repeat: no-repeat;
+  background-position: 10% 10%, 10% 40%, 10% 70%, 90% 90%;
+  background-size: 40px 40px, 35px 35px, 30px 30px, 35px 35px;
+  opacity: 0.05; /* subtle */
+  pointer-events: none;
+}
+
+/* Headings */
+h2 {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: black;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+}
+
+h3 {
+  font-size: 1rem;
+  color: black;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 1rem;
+  color: black;
+  float: right;
+  margin-top: -25px;
+  margin-bottom: 1rem;
+}
+
+/* Hide burger menu and button by default */
+.burger-menu,
+.burger-menu-btn {
+  display: none;
+}
+
+
+
+
+
 /* MOBILE VERSION */
 
 @media only screen and (max-width: 786px) {
 
 html, body {
+    overflow-x: hidden;
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
 }
-
-
 
 
 .body2 {
@@ -526,7 +719,10 @@ html, body {
     display: flex;
     justify-content: space-between;
     z-index: 1000;
+    background-color: #17A589;
 }
+
+
 
 .head-main img {
     width: 55px;
@@ -535,6 +731,7 @@ html, body {
 }
 
 .header-main-span {
+    background-color: #17A589;
     display: none;
 }
 
@@ -572,6 +769,3 @@ html, body {
 }
 
 }
-
-
-

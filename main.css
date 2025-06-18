@@ -63,6 +63,24 @@ h4 {
   display: none;
 }
 
+
+.about-text h1{
+  width: 900px;
+  color: black;
+  font-size: 40px;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  color: black;
+  letter-spacing: 1px;
+  line-height: 18px;
+  font-size: 18px;
+  margin-bottom: 45px;
+  Display: flex;
+ 
+}
 /* MOBILE VERSION */
 @media only screen and (max-width: 786px) {
 
@@ -86,7 +104,7 @@ h4 {
     width: 100vw; /* full viewport width */
     height: 100vh;
     z-index: 900;
-    background-color: #111;
+    background-color: rgba(0, 0, 0, 0.6);
     padding-top: 80px;
     overflow-y: auto;
   }
@@ -101,7 +119,7 @@ h4 {
   }
 
   .burger-menu ul li {
-    border-top: 1px solid lightgreen;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.6);
     padding-left: 30px;
     text-align: left;
   }
@@ -121,7 +139,7 @@ h4 {
   }
 
   .burger-menu ul li:nth-child(4) {
-    border-bottom: 1px solid lightgreen;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
     padding-bottom: 30px;
   }
 
@@ -130,26 +148,31 @@ h4 {
     display: none;
   }
 
-  /* About text styles */
   .about-text {
     width: 100%;
     text-align: center;
     margin: 20px 0;
+    padding: 0 15px; /* un peu de marge à gauche/droite */
   }
-
+  
   .about-text h1 {
+    width: auto; /* ✅ supprime la largeur fixe */
     font-size: 1.8rem;
     color: black;
     text-transform: capitalize;
-    padding-right: 150%;
+    text-align: center; /* facultatif si hérité */
+    margin: 0 auto;
   }
-
+  
   .about-text p {
-    font-size: 0.6rem;
-    line-height: 1.2;
+    font-size: 0.5rem;
+    line-height: 1.4;
     color: black;
-    margin-bottom: -15%;
+    text-align: center;
+    display: block; /* ✅ supprime display: flex */
+    margin-bottom:-40px;
   }
+  
 
   /* Main quotes */
   .main2 {
@@ -161,7 +184,7 @@ h4 {
     line-height: 1.4;
     color: black;
     font-family: 'Roboto', sans-serif;
-    text-align: center;
+   
     padding: 0 25px;
     margin-top: -4%;
     margin-bottom: 0;
@@ -174,12 +197,10 @@ h4 {
 
   /* Middle text */
   .midle-text {
-    
     font-size: 0.8rem;
-    text-align: center;
     padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
-
+    padding-left: 5%;
   }
 
   .midle-text p {

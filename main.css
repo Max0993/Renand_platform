@@ -152,6 +152,10 @@ h4 {
   }
 
   /* Main quotes */
+  .main2 {
+    background-color: whitesmoke;
+  }
+
   .main-quotes p {
     font-size: 0.8rem;
     line-height: 1.4;
@@ -160,6 +164,7 @@ h4 {
     text-align: center;
     padding: 0 25px;
     margin-top: -4%;
+    margin-bottom: 0;
   }
 
   .main-quotes h2 {
@@ -169,10 +174,18 @@ h4 {
 
   /* Middle text */
   .midle-text {
+    
     font-size: 0.8rem;
     text-align: center;
     padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
+
+  }
+
+  .midle-text p {
+    
+    font-size: 0.8rem;
+    
   }
 
   /* Index paragraph */
@@ -222,7 +235,7 @@ h4 {
     border-radius: 10px;
     border: none;
     font-size: 0.8rem;
-    color: #FFFFE0;
+    color: white;
     cursor: pointer;
   
   }
@@ -234,7 +247,7 @@ h4 {
     border-radius: 10px;
     border: none;
     font-size: 0.8rem;
-    color: #FFFFE0;
+    color: white;
     cursor: pointer;
    margin-left: 10%;
   }

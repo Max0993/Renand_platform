@@ -150,7 +150,7 @@ h4 {
 
   .about-text {
     width: 100%;
-    text-align: center;
+    
     margin: 20px 0;
     padding: 0 15px; /* un peu de marge à gauche/droite */
   }
@@ -165,10 +165,10 @@ h4 {
   }
   
   .about-text p {
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     line-height: 1.4;
     color: black;
-    text-align: center;
+    
     display: block; /* ✅ supprime display: flex */
     margin-bottom:-40px;
   }

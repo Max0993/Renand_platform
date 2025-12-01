@@ -89,8 +89,6 @@ html, body {
 
 
 .main-quotes p {
-    
-  
     font-size: 18px;
     line-height: 20px;
     color: black;
@@ -98,7 +96,7 @@ html, body {
 }
 
 .midle-text {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     
     padding-bottom: 20px;
     font-family: robote;
@@ -692,8 +690,6 @@ html, body {
     background-color: #17A589;
 }
 
-
-
 .head-main img {
     width: 55px;
     display: flex;
@@ -711,6 +707,14 @@ html, body {
 }
 
 
+.midle-text p {
+    font-size: 1.4rem;
+   line-height: 20px;
+    color: black;
+    /*font-family: robote;*/
+    padding-left: 6px;
+}
+
 .index-category {
    flex-direction: column;
    align-items: center;
@@ -719,6 +723,10 @@ html, body {
    
 }
 
+.vetification-btn h4 {
+    
+    text-align: center;
+  }
 
 .index-category p {
     color: rgb(3, 3, 3);

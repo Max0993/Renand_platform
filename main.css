@@ -48,14 +48,6 @@ h3 {
   margin: 0 0 0.5rem 0;
 }
 
-h4 {
-  font-weight: 600;
-  font-size: 1rem;
-  color: black;
-  float: right;
-  margin-top: -25px;
-  margin-bottom: 1rem;
-}
 
 /* Hide burger menu and button by default */
 .burger-menu,
@@ -231,10 +223,11 @@ h4 {
   }
 
   .vetification-btn h4 {
+    padding-right: 32%;
     margin-top: 5px;
     font-size: 0.8rem;
     margin-bottom: 5px;
-    margin-right: 4%;
+
   }
 
   .vetification-btn {

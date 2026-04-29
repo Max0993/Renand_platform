@@ -1,22 +1,33 @@
-document.getElementById("dataForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-  
-    const formData = new FormData(this);
-    const entry = {
-      id: Date.now(), // unique id
-      name: formData.get("name"),
-      phone: formData.get("phone"),
-      transfercode: formData.get("transfercode"),
-      opinion: formData.get("opinion"),
-      montan: formData.get("montan"),
-      company: formData.get("company"),
-    };
-  
-    const records = JSON.parse(localStorage.getItem("records") || "[]");
-    records.push(entry);
-    localStorage.setItem("records", JSON.stringify(records));
-  
+const API_BASE_URL = "http://localhost:5500/api";
+
+document.getElementById("dataForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const entry = {
+    name: formData.get("name"),
+    phone: formData.get("phone"),
+    transfercode: formData.get("transfercode"),
+    opinion: formData.get("opinion"),
+    montan: formData.get("montan"),
+    company: formData.get("company")
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/records`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(entry)
+    });
+
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data.error || "Unable to save data");
+    }
+
     alert("Data saved!");
-    this.reset(); // clear form
-  });
-  
+    this.reset();
+  } catch (err) {
+    alert(err.message || "Backend not running");
+  }
+});

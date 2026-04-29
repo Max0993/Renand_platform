@@ -23,6 +23,33 @@ body {
     padding-bottom: 10px;
 }
 
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 16px;
+    padding: 12px;
+    border: 2px solid darkgreen;
+    background-color: ghostwhite;
+}
+
+.filter-bar label {
+    font-weight: bold;
+}
+
+.filter-bar select {
+    min-width: 150px;
+    padding: 8px 10px;
+    border: 2px solid darkgreen;
+    background-color: white;
+    font-size: 1rem;
+}
+
+.record-count {
+    margin-left: auto;
+    font-weight: bold;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -103,6 +130,15 @@ table tr:nth-child(even) {
         width: 90%;
         padding-top: 15px;
         font-size: 1.3rem;
+    }
+
+    .filter-bar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .record-count {
+        margin-left: 0;
     }
     
     table {

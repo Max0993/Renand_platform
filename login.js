@@ -1,20 +1,27 @@
-document.getElementById("loginForm").addEventListener("submit", function(e) {
+const API_BASE_URL = "http://localhost:5500/api";
+
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const formData = new FormData(e.target);
   const username = formData.get("username");
   const password = formData.get("password");
 
-  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
 
-  const user = users.find(u => u.username === username && u.password === password);
+    const data = await response.json().catch(() => ({}));
 
-  if (user) {
-    // Login success
-    localStorage.setItem("loggedInUser", JSON.stringify(user));
-    window.location.href = "getdata.html"; // Replace with your page
-  } else {
-    alert("Modpas la oswa non itilizatè a pa kòrèk!");
+    if (!response.ok) {
+      throw new Error(data.message || "Invalid username or password");
+    }
+
+    window.location.href = "getdata.html";
+  } catch (err) {
+    alert(err.message || "Backend not running");
   }
 });
-

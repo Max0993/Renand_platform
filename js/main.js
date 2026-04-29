@@ -17,3 +17,24 @@ burgerBtn.onclick = function () {
 	}
 
 }
+
+/* async function loadProducts() {
+  const res = await fetch("http://localhost:5000/api/products");
+  const products = await res.json();
+
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  products.forEach(p => {
+    container.innerHTML += `
+      <div class="card">
+        <img src="${p.image}" />
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <span>$${p.price}</span>
+      </div>
+    `;
+  });
+}
+
+loadProducts();*/

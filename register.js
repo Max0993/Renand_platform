@@ -1,26 +1,33 @@
-document.getElementById("registerForm").addEventListener("submit", function (e) {
+const API_BASE_URL = "http://localhost:5500/api";
+
+document.getElementById("registerForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const formData = new FormData(this);
-  const username = formData.get("username").trim();
-  const password = formData.get("password").trim();
+  const username = (formData.get("username") || "").trim();
+  const password = (formData.get("password") || "").trim();
 
   if (!username || !password) {
     alert("Please fill in all fields.");
     return;
   }
 
-  let users = JSON.parse(localStorage.getItem("users") || "[]");
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
 
-  const userExists = users.some(user => user.username === username);
-  if (userExists) {
-    alert("Username already exists. Choose another.");
-    return;
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(data.message || "Registration failed");
+    }
+
+    alert("Registration successful!");
+    window.location.href = "login.html";
+  } catch (err) {
+    alert(err.message || "Backend not running");
   }
-
-  users.push({ username, password });
-  localStorage.setItem("users", JSON.stringify(users));
-
-  alert("Registration successful!");
-  window.location.href = "login.html"; // Redirect to login
 });

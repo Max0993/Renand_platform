@@ -15,10 +15,24 @@
 
 <section class="wrapper-main">
   <h2>Konfimasyon kliyan yo</h2>
+
+  <div class="filter-bar">
+    <label for="timeFilter">Filter by:</label>
+    <select id="timeFilter" aria-label="Filter records by time range">
+      <option value="all">All</option>
+      <option value="day">Today</option>
+      <option value="week">This week</option>
+      <option value="month">This month</option>
+      <option value="year">This year</option>
+    </select>
+    <span id="recordCount" class="record-count"></span>
+  </div>
+
   <table id="clientTable">
     <thead>
       <tr>
         <th>id</th>
+        <th>date</th>
         <th>name</th>
         <th>phone</th>
         <th>transfercode</th>
@@ -35,32 +49,117 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const API_BASE_URL = "http://localhost:5500/api";
   const tableBody = document.querySelector("#clientTable tbody");
-  const data = JSON.parse(localStorage.getItem("clientData") || "[]");
+  const timeFilter = document.getElementById("timeFilter");
+  const recordCount = document.getElementById("recordCount");
+  let data = [];
 
-  // Clear the table first
-  tableBody.innerHTML = "";
+  function getRangeStart(range) {
+    const now = new Date();
+    const start = new Date(now);
 
-  if (data.length === 0) {
-    tableBody.innerHTML = "<tr><td colspan='7'>No records found</td></tr>";
-    return;
+    if (range === "day") {
+      start.setHours(0, 0, 0, 0);
+      return start;
+    }
+
+    if (range === "week") {
+      const day = start.getDay();
+      const daysSinceMonday = day === 0 ? 6 : day - 1;
+      start.setDate(start.getDate() - daysSinceMonday);
+      start.setHours(0, 0, 0, 0);
+      return start;
+    }
+
+    if (range === "month") {
+      return new Date(now.getFullYear(), now.getMonth(), 1);
+    }
+
+    if (range === "year") {
+      return new Date(now.getFullYear(), 0, 1);
+    }
+
+    return null;
   }
 
-  data.forEach((row, index) => {
-    const tr = document.createElement("tr");
+  function getRecordDate(row) {
+    const rawDate = row.createdAt || row.date || row.id;
+    const date = rawDate ? new Date(rawDate) : null;
+    return date && !Number.isNaN(date.getTime()) ? date : null;
+  }
 
-    tr.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${row.name}</td>
-      <td>${row.phone}</td>
-      <td>${row.transfercode}</td>
-      <td>${row.opinion}</td>
-      <td>${row.montan}</td>
-      <td>${row.company}</td>
-    `;
+  function isInRange(row, range) {
+    if (range === "all") {
+      return true;
+    }
 
-    tableBody.appendChild(tr);
-  });
+    const date = getRecordDate(row);
+    const start = getRangeStart(range);
+    return Boolean(date && start && date >= start && date <= new Date());
+  }
+
+  function addCell(rowElement, value) {
+    const cell = rowElement.insertCell();
+    cell.textContent = value || "";
+  }
+
+  function renderRows() {
+    const range = timeFilter.value;
+    const filteredData = data.filter(row => isInRange(row, range));
+
+    tableBody.innerHTML = "";
+    recordCount.textContent = `${filteredData.length} record${filteredData.length === 1 ? "" : "s"}`;
+
+    if (filteredData.length === 0) {
+      const emptyRow = tableBody.insertRow();
+      const emptyCell = emptyRow.insertCell();
+      emptyCell.colSpan = 8;
+      emptyCell.textContent = "No records found";
+      return;
+    }
+
+    filteredData.forEach((row, index) => {
+      const tr = tableBody.insertRow();
+      const date = getRecordDate(row);
+
+      addCell(tr, index + 1);
+      addCell(tr, date ? date.toLocaleDateString() : "Unknown");
+      addCell(tr, row.name);
+      addCell(tr, row.phone);
+      addCell(tr, row.transfercode);
+      addCell(tr, row.opinion);
+      addCell(tr, row.montan);
+      addCell(tr, row.company);
+    });
+  }
+
+  async function loadRecords() {
+    tableBody.innerHTML = "<tr><td colspan='8'>Loading records...</td></tr>";
+    recordCount.textContent = "";
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/records`);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Unable to load records");
+      }
+
+      data = await response.json();
+      renderRows();
+    } catch (err) {
+      tableBody.innerHTML = "";
+      const errorRow = tableBody.insertRow();
+      const errorCell = errorRow.insertCell();
+      errorCell.colSpan = 8;
+      errorCell.textContent = err.message || "Backend not running";
+      recordCount.textContent = "";
+    }
+  }
+
+  timeFilter.addEventListener("change", renderRows);
+  loadRecords();
 });
 
 

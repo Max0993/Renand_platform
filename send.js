@@ -1,4 +1,6 @@
-document.getElementById("dataForm").addEventListener("submit", function (e) {
+const API_BASE_URL = "http://localhost:5500/api";
+
+document.getElementById("dataForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const formData = new FormData(e.target);
@@ -11,13 +13,20 @@ document.getElementById("dataForm").addEventListener("submit", function (e) {
     company: formData.get("company")
   };
 
-  // Get existing data from localStorage
-  const existing = JSON.parse(localStorage.getItem("clientData") || "[]");
-  existing.push(entry);
+  try {
+    const response = await fetch(`${API_BASE_URL}/records`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(entry)
+    });
 
-  // Save updated data
-  localStorage.setItem("clientData", JSON.stringify(existing));
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data.error || "Unable to save data");
+    }
 
-  // Redirect like PHP did
-  window.location.href = "check.html";
+    window.location.href = "check.html";
+  } catch (err) {
+    alert(err.message || "Backend not running");
+  }
 });

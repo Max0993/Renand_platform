@@ -77,6 +77,7 @@ app.get("/api/data", async (req, res) => {
 
 app.use("/api/records", recordsRouter);
 app.use("/api/data", recordsRouter);
+app.use("/api/data/records", recordsRouter);
 
 app.use("/api/auth", require("./routes/auth"));
 

@@ -65,6 +65,7 @@ app.use("/api", (req, res, next) => {
 });
 
 const recordsRouter = require("./routes/records");
+const authRouter = require("./routes/auth");
 
 app.get("/api/data", async (req, res) => {
   try {
@@ -79,7 +80,8 @@ app.use("/api/records", recordsRouter);
 app.use("/api/data", recordsRouter);
 app.use("/api/data/records", recordsRouter);
 
-app.use("/api/auth", require("./routes/auth"));
+app.use("/api/auth", authRouter);
+app.use("/api/data/auth", authRouter);
 
 
 const PORT = process.env.PORT || 5500;

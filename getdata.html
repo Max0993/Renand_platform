@@ -49,11 +49,12 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE_URL = "https://renand-platform.onrender.com/api/data";
+  const API_ROOT = "https://renand-platform.onrender.com/api";
   const tableBody = document.querySelector("#clientTable tbody");
   const timeFilter = document.getElementById("timeFilter");
   const recordCount = document.getElementById("recordCount");
   let data = [];
+  let adminToken = "";
 
   function getRangeStart(range) {
     const now = new Date();
@@ -139,7 +140,13 @@ document.addEventListener("DOMContentLoaded", () => {
     recordCount.textContent = "";
 
     try {
-      const response = await fetch(`${API_BASE_URL}/records`);
+      const headers = adminToken ? { Authorization: `Bearer ${adminToken}` } : {};
+      const response = await fetch(`${API_ROOT}/data`, { headers });
+
+      if (response.status === 401) {
+        await verifyAdminOtp();
+        return loadRecords();
+      }
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -158,6 +165,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  async function verifyAdminOtp() {
+    alert("An admin OTP was sent to the configured admin email.");
+    const otp = prompt("Enter the admin OTP code:");
+
+    if (!otp) {
+      throw new Error("Admin OTP is required");
+    }
+
+    const response = await fetch(`${API_ROOT}/admin/verify-otp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ otp })
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || !result.token) {
+      throw new Error(result.message || result.error || "Invalid admin OTP");
+    }
+
+    adminToken = result.token;
+  }
+
   timeFilter.addEventListener("change", renderRows);
   loadRecords();
 });
@@ -166,4 +196,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-

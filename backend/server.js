@@ -43,10 +43,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 app.use(express.json());
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return res.status(400).json({ error: "Invalid JSON body" });
+  }
+
+  next(err);
+});
 
 const Record = require("./models/Record");
 const recordsRouter = require("./routes/records");
 const authRouter = require("./routes/auth");
+const { router: adminRouter, requireAdminToken } = require("./routes/admin");
 
 const mongoUri = process.env.MONGO_URI;
 
@@ -80,6 +88,12 @@ app.get("/", (req, res) => {
       "GET /api/data",
       "GET /api/data/records",
       "POST /api/data/records",
+      "POST /api/admin/request-otp",
+      "POST /api/admin/verify-otp",
+      "POST /api/auth/request-otp",
+      "POST /api/auth/verify-otp",
+      "POST /api/auth/register",
+      "POST /api/auth/login",
       "POST /api/data/auth/register",
       "POST /api/data/auth/login"
     ]
@@ -90,7 +104,7 @@ app.get("/test", (req, res) => {
   res.send("OK");
 });
 
-app.get("/api/data", requireDatabase, async (req, res) => {
+app.get("/api/data", requireDatabase, requireAdminToken, async (req, res) => {
   try {
     const data = await Record.find().sort({ createdAt: -1 });
     res.json(data);
@@ -99,11 +113,13 @@ app.get("/api/data", requireDatabase, async (req, res) => {
   }
 });
 
+app.use("/api/admin", adminRouter);
+
 app.use("/api/records", requireDatabase, recordsRouter);
 app.use("/api/data/records", requireDatabase, recordsRouter);
 
-app.use("/api/auth", requireDatabase, authRouter);
-app.use("/api/data/auth", requireDatabase, authRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/data/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });

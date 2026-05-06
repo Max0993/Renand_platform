@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://renand-platform.onrender.com/api/data";
+const API_BASE_URL = "https://renand-platform.onrender.com/api";
 
 document.getElementById("loginForm").addEventListener("submit", async function (e) {
   e.preventDefault();

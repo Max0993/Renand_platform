@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Record = require("../models/Record");
+const { sendRecordNotification } = require("../utils/mailer");
 
 function getRangeStart(range) {
   const now = new Date();
@@ -43,7 +44,16 @@ router.post("/", async (req, res) => {
       company
     });
 
-    res.status(201).json(record);
+    let notificationSent = true;
+
+    try {
+      await sendRecordNotification(record);
+    } catch (emailErr) {
+      notificationSent = false;
+      console.error("Record notification email failed:", emailErr.message);
+    }
+
+    res.status(201).json({ record, notificationSent });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
